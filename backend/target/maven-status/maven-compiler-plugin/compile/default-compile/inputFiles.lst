@@ -1,1 +1,7 @@
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\BackendApplication.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\config\SecurityConfig.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\controller\AuthController.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\RegisterRequest.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\entity\User.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\repository\UserRepository.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\UserService.java
