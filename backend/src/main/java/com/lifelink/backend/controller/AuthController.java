@@ -1,5 +1,6 @@
 package com.lifelink.backend.controller;
 
+import com.lifelink.backend.response.ApiResponse;
 import com.lifelink.backend.dto.RegisterRequest;
 import com.lifelink.backend.service.UserService;
 import jakarta.validation.Valid;
@@ -17,7 +18,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @RequestBody RegisterRequest request) {
+    public ApiResponse register(@Valid @RequestBody RegisterRequest request) {
 
         return userService.registerUser(request);
 

@@ -1,5 +1,6 @@
 package com.lifelink.backend.service;
 
+import com.lifelink.backend.response.ApiResponse;
 import com.lifelink.backend.dto.RegisterRequest;
 import com.lifelink.backend.entity.User;
 import com.lifelink.backend.repository.UserRepository;
@@ -19,10 +20,10 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String registerUser(RegisterRequest request) {
+   public ApiResponse registerUser(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            return "Email already exists!";
+            return new ApiResponse("Email already exists!");
         }
 
         User user = new User();
@@ -38,7 +39,7 @@ public class UserService {
 
         userRepository.save(user);
 
-        return "User Registered Successfully!";
+        return new ApiResponse("User Registered Successfully!");
     }
 
 }
