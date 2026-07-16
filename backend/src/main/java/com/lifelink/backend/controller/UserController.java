@@ -1,13 +1,26 @@
 package com.lifelink.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.lifelink.backend.dto.ProfileResponse;
+import com.lifelink.backend.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
-    @GetMapping("/api/user/profile")
-    public String profile() {
-        return "Welcome to LifeLink!";
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/profile")
+    public ProfileResponse profile(Authentication authentication) {
+
+        String email = authentication.getName();
+
+        return userService.getProfile(email);
     }
 }

@@ -1,15 +1,15 @@
 package com.lifelink.backend.service;
 
-import com.lifelink.backend.security.JwtService;
-import com.lifelink.backend.response.ApiResponse;
-import com.lifelink.backend.dto.RegisterRequest;
-import com.lifelink.backend.entity.User;
-import com.lifelink.backend.repository.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 import com.lifelink.backend.dto.LoginRequest;
 import com.lifelink.backend.dto.LoginResponse;
 import com.lifelink.backend.dto.ProfileResponse;
+import com.lifelink.backend.dto.RegisterRequest;
+import com.lifelink.backend.entity.User;
+import com.lifelink.backend.repository.UserRepository;
+import com.lifelink.backend.response.ApiResponse;
+import com.lifelink.backend.security.JwtService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -30,23 +30,20 @@ public class UserService {
     public ApiResponse registerUser(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            return new ApiResponse("Email already exists!");
+            return new ApiResponse(false, "Email already exists!");
         }
 
         User user = new User();
 
         user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
-
-        // Encrypt password
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-
         user.setBloodGroup(request.getBloodGroup());
         user.setRole(request.getRole());
 
         userRepository.save(user);
 
-        return new ApiResponse("User Registered Successfully!");
+        return new ApiResponse(true, "User Registered Successfully!");
     }
 
     public LoginResponse loginUser(LoginRequest request) {
@@ -75,5 +72,4 @@ public class UserService {
                 user.getBloodGroup(),
                 user.getRole());
     }
-
 }
