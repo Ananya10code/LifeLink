@@ -6,26 +6,26 @@ import jakarta.validation.constraints.NotNull;
 
 public class BloodRequestDto {
 
-    @NotBlank(message = "Patient name is required")
+    @NotBlank
     private String patientName;
 
-    @NotBlank(message = "Hospital name is required")
+    @NotBlank
     private String hospital;
 
-    @NotBlank(message = "Blood group is required")
+    @NotBlank
     private String bloodGroup;
 
-    @NotNull(message = "Units are required")
-    @Min(value = 1, message = "Units must be at least 1")
+    @NotNull
+    @Min(1)
     private Integer units;
 
-    @NotBlank(message = "City is required")
+    @NotBlank
     private String city;
 
-    @NotBlank(message = "Urgency is required")
+    @NotBlank
     private String urgency;
 
-    @NotBlank(message = "Contact number is required")
+    @NotBlank
     private String contact;
 
     public BloodRequestDto() {
