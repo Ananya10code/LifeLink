@@ -2,8 +2,11 @@ C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\BackendApplic
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\config\SecurityConfig.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\controller\AuthController.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\controller\BloodRequestController.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\controller\DashboardController.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\controller\UserController.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\AuthResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\BloodRequestDto.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\DashboardResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\LoginRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\LoginResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\ProfileResponse.java
@@ -16,6 +19,8 @@ C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\repository\Us
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\response\ApiResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\security\JwtAuthenticationFilter.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\security\JwtService.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\AuthenticationService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\BloodRequestService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\CustomUserDetailsService.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\DashboardService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\UserService.java
