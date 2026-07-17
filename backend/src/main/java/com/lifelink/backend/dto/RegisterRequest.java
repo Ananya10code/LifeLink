@@ -9,6 +9,7 @@ public class RegisterRequest {
     private String fullName;
 
     @Email
+    @NotBlank
     private String email;
 
     @NotBlank
@@ -16,6 +17,12 @@ public class RegisterRequest {
 
     @NotBlank
     private String bloodGroup;
+
+    @NotBlank
+    private String phone;
+
+    @NotBlank
+    private String city;
 
     @NotBlank
     private String role;
@@ -53,6 +60,22 @@ public class RegisterRequest {
 
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getRole() {

@@ -4,6 +4,7 @@ import { register } from "../services/authService";
 
 function Register() {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -57,7 +58,9 @@ function Register() {
       newErrors.password = "Password must be at least 6 characters";
     }
 
-    if (form.password !== form.confirmPassword) {
+    if (!form.confirmPassword) {
+      newErrors.confirmPassword = "Confirm your password";
+    } else if (form.password !== form.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
 
@@ -81,6 +84,8 @@ function Register() {
         fullName: form.name,
         email: form.email,
         password: form.password,
+        phone: form.phone,
+        city: form.city,
         bloodGroup: form.bloodGroup,
         role: form.role.toUpperCase(),
       });
@@ -88,7 +93,6 @@ function Register() {
       alert(response.data.message);
 
       navigate("/login");
-
     } catch (error) {
       console.log(error);
       console.log("Response:", error.response);
@@ -104,9 +108,7 @@ function Register() {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-red-50">
-
       <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-xl">
-
         <h1 className="text-3xl font-bold text-center text-red-600 mb-2">
           Create Account
         </h1>
@@ -125,7 +127,9 @@ function Register() {
             onChange={handleChange}
             className="w-full border rounded-lg p-3"
           />
-          {errors.name && <p className="text-red-600 text-sm">{errors.name}</p>}
+          {errors.name && (
+            <p className="text-red-600 text-sm">{errors.name}</p>
+          )}
 
           <input
             type="email"
@@ -135,7 +139,9 @@ function Register() {
             onChange={handleChange}
             className="w-full border rounded-lg p-3"
           />
-          {errors.email && <p className="text-red-600 text-sm">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-600 text-sm">{errors.email}</p>
+          )}
 
           <input
             type="text"
@@ -145,7 +151,9 @@ function Register() {
             onChange={handleChange}
             className="w-full border rounded-lg p-3"
           />
-          {errors.phone && <p className="text-red-600 text-sm">{errors.phone}</p>}
+          {errors.phone && (
+            <p className="text-red-600 text-sm">{errors.phone}</p>
+          )}
 
           <select
             name="bloodGroup"
@@ -163,6 +171,7 @@ function Register() {
             <option>O+</option>
             <option>O-</option>
           </select>
+
           {errors.bloodGroup && (
             <p className="text-red-600 text-sm">{errors.bloodGroup}</p>
           )}
@@ -175,7 +184,9 @@ function Register() {
             onChange={handleChange}
             className="w-full border rounded-lg p-3"
           />
-          {errors.city && <p className="text-red-600 text-sm">{errors.city}</p>}
+          {errors.city && (
+            <p className="text-red-600 text-sm">{errors.city}</p>
+          )}
 
           <select
             name="role"
@@ -216,15 +227,13 @@ function Register() {
 
           <button
             type="submit"
-            className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700"
+            className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition"
           >
             Register
           </button>
 
         </form>
-
       </div>
-
     </div>
   );
 }

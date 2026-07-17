@@ -23,27 +23,19 @@ public class User {
     private String bloodGroup;
 
     @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
     private String role;
 
     public User() {
     }
 
-    public User(Long id, String fullName, String email,
-                String password, String bloodGroup, String role) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.bloodGroup = bloodGroup;
-        this.role = role;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFullName() {
@@ -76,6 +68,22 @@ public class User {
 
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getRole() {

@@ -44,6 +44,8 @@ public class AuthenticationService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setBloodGroup(request.getBloodGroup());
+        user.setPhone(request.getPhone());
+        user.setCity(request.getCity());
         user.setRole(request.getRole());
 
         userRepository.save(user);

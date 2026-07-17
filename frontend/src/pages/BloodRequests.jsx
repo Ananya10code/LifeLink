@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { volunteer } from "../services/volunteerService";
 
 function BloodRequests() {
 
@@ -72,6 +73,24 @@ function BloodRequests() {
             default:
                 return "bg-gray-500";
         }
+    };
+    const handleVolunteer = async (requestId) => {
+
+        try {
+
+            const response = await volunteer(requestId);
+
+            alert(response.data.message);
+
+        } catch (error) {
+
+            alert(
+                error.response?.data?.message ||
+                "Unable to volunteer"
+            );
+
+        }
+
     };
 
     return (
@@ -156,6 +175,7 @@ function BloodRequests() {
                             <th className="p-4">Units</th>
                             <th className="p-4">Urgency</th>
                             <th className="p-4">Contact</th>
+                            <th className="p-4">Action</th>
 
                         </tr>
 
@@ -219,6 +239,17 @@ function BloodRequests() {
 
                                     <td className="p-4">
                                         {request.contact}
+                                    </td>
+
+                                    <td className="p-4">
+
+                                        <button
+                                            onClick={() => handleVolunteer(request.id)}
+                                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                                        >
+                                            Volunteer
+                                        </button>
+
                                     </td>
 
                                 </tr>
