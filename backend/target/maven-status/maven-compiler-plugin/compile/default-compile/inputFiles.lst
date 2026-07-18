@@ -13,6 +13,7 @@ C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\Dashboard
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\DonorResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\LoginRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\LoginResponse.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\PasswordUpdateRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\ProfileResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\RegisterRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\UpdateProfileRequest.java

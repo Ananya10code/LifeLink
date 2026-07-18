@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { volunteer } from "../services/volunteerService";
 
 function BloodRequests() {
+
+    const navigate = useNavigate();
 
     const [requests, setRequests] = useState([]);
     const [search, setSearch] = useState("");
@@ -14,6 +17,7 @@ function BloodRequests() {
     }, []);
 
     const fetchRequests = async () => {
+
         try {
 
             const token = localStorage.getItem("token");
@@ -35,9 +39,11 @@ function BloodRequests() {
             alert("Unable to load blood requests");
 
         }
+
     };
 
     const filteredRequests = useMemo(() => {
+
         return requests.filter((request) => {
 
             const matchesSearch =
@@ -60,20 +66,28 @@ function BloodRequests() {
             );
 
         });
+
     }, [requests, search, bloodGroupFilter, urgencyFilter]);
 
     const urgencyColor = (urgency) => {
+
         switch (urgency) {
+
             case "HIGH":
                 return "bg-red-500";
+
             case "MEDIUM":
                 return "bg-yellow-500";
+
             case "LOW":
                 return "bg-green-500";
+
             default:
                 return "bg-gray-500";
         }
+
     };
+
     const handleVolunteer = async (requestId) => {
 
         try {
@@ -116,6 +130,8 @@ function BloodRequests() {
                 </div>
 
             </div>
+
+            {/* Filters */}
 
             <div className="bg-white p-5 rounded-xl shadow mb-6">
 
@@ -160,6 +176,8 @@ function BloodRequests() {
 
             </div>
 
+            {/* Table */}
+
             <div className="bg-white rounded-xl shadow overflow-hidden">
 
                 <table className="w-full">
@@ -175,7 +193,8 @@ function BloodRequests() {
                             <th className="p-4">Units</th>
                             <th className="p-4">Urgency</th>
                             <th className="p-4">Contact</th>
-                            <th className="p-4">Action</th>
+                            <th className="p-4">Volunteer</th>
+                            <th className="p-4">Matching Donors</th>
 
                         </tr>
 
@@ -188,7 +207,7 @@ function BloodRequests() {
                             <tr>
 
                                 <td
-                                    colSpan="7"
+                                    colSpan="9"
                                     className="text-center p-8 text-gray-500"
                                 >
                                     No blood requests found.
@@ -210,9 +229,11 @@ function BloodRequests() {
                                     </td>
 
                                     <td className="p-4">
+
                                         <span className="bg-red-100 text-red-600 px-3 py-1 rounded-full">
                                             {request.bloodGroup}
                                         </span>
+
                                     </td>
 
                                     <td className="p-4">
@@ -252,6 +273,19 @@ function BloodRequests() {
 
                                     </td>
 
+                                    <td className="p-4">
+
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/matching-donors/${request.id}`)
+                                            }
+                                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                                        >
+                                            View Donors
+                                        </button>
+
+                                    </td>
+
                                 </tr>
 
                             ))
@@ -267,6 +301,7 @@ function BloodRequests() {
         </div>
 
     );
+
 }
 
 export default BloodRequests;

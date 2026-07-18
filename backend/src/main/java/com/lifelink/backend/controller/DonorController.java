@@ -17,6 +17,7 @@ public class DonorController {
         this.service = service;
     }
 
+    // Existing donor search
     @GetMapping
     public List<DonorResponse> getDonors(
 
@@ -29,4 +30,14 @@ public class DonorController {
         return service.getDonors(bloodGroup, city);
 
     }
+
+    // NEW: Matching donors for a blood request
+    @GetMapping("/match/{requestId}")
+    public List<DonorResponse> getMatchingDonors(
+            @PathVariable Long requestId) {
+
+        return service.getMatchingDonors(requestId);
+
+    }
+
 }

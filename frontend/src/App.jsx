@@ -11,9 +11,11 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/dashboard/Profile";
 
 // Main Pages
 import Donors from "./pages/Donors";
+import MatchingDonors from "./pages/MatchingDonors";
 import Dashboard from "./pages/Dashboard";
 import BloodRequest from "./pages/BloodRequest";
 import BloodRequests from "./pages/BloodRequests";
@@ -104,6 +106,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/matching-donors/:id"
+          element={
+            <ProtectedRoute>
+              <MatchingDonors />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/donors"
@@ -123,6 +133,15 @@ function App() {
               <Navbar />
               <NotFound />
             </>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
           }
         />
 

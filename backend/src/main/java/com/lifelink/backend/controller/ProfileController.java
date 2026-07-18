@@ -2,8 +2,8 @@ package com.lifelink.backend.controller;
 
 import com.lifelink.backend.dto.ProfileResponse;
 import com.lifelink.backend.dto.UpdateProfileRequest;
-import com.lifelink.backend.service.ProfileService;
-import jakarta.validation.Valid;
+import com.lifelink.backend.response.ApiResponse;
+import com.lifelink.backend.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,27 +12,28 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:5173")
 public class ProfileController {
 
-    private final ProfileService service;
+    private final UserService userService;
 
-    public ProfileController(ProfileService service) {
-        this.service = service;
+    public ProfileController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
     public ProfileResponse getProfile(Authentication authentication) {
 
-        return service.getProfile(authentication.getName());
+        return userService.getProfile(authentication.getName());
 
     }
 
     @PutMapping
-    public ProfileResponse updateProfile(
+    public ApiResponse updateProfile(
             Authentication authentication,
-            @Valid @RequestBody UpdateProfileRequest request) {
+            @RequestBody UpdateProfileRequest request) {
 
-        return service.updateProfile(
+        return userService.updateProfile(
                 authentication.getName(),
                 request);
 
     }
+
 }

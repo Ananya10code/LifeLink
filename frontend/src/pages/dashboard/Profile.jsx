@@ -1,87 +1,129 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getProfile,
+  updateProfile
+} from "../../services/profileService";
 
 function Profile() {
+
   const [profile, setProfile] = useState({
-    name: "Ananya Kushwah",
-    email: "ananya@example.com",
-    phone: "9876543210",
-    bloodGroup: "O+",
-    age: "21",
-    gender: "Female",
-    city: "Bhopal",
-    available: true,
+    fullName: "",
+    email: "",
+    phone: "",
+    city: "",
+    bloodGroup: "",
+    role: ""
   });
 
+  useEffect(() => {
+    loadProfile();
+  }, []);
+
+  const loadProfile = async () => {
+
+    try {
+
+      const response = await getProfile();
+
+      setProfile(response.data);
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Unable to load profile");
+
+    }
+
+  };
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
 
     setProfile({
       ...profile,
-      [name]: type === "checkbox" ? checked : value,
+      [e.target.name]: e.target.value
     });
+
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
-    alert("Profile Updated Successfully!");
+
+    try {
+
+      const response = await updateProfile({
+
+        fullName: profile.fullName,
+        phone: profile.phone,
+        city: profile.city,
+        bloodGroup: profile.bloodGroup
+
+      });
+
+      alert(response.data.message);
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Unable to update profile");
+
+    }
+
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8">
 
-      <h1 className="text-3xl font-bold mb-8">
-        👤 My Profile
-      </h1>
+    <div className="min-h-screen bg-red-50 flex justify-center items-center">
 
-      <form
-        onSubmit={handleSubmit}
-        className="grid md:grid-cols-2 gap-6"
-      >
+      <div className="bg-white p-8 rounded-xl shadow-xl w-full max-w-xl">
 
-        <div>
-          <label className="font-medium">Full Name</label>
+        <h1 className="text-3xl font-bold text-red-600 mb-6">
+          My Profile
+        </h1>
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5"
+        >
 
           <input
             type="text"
-            name="name"
-            value={profile.name}
+            name="fullName"
+            value={profile.fullName}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
+            className="w-full border rounded-lg p-3"
           />
-        </div>
-
-        <div>
-          <label className="font-medium">Email</label>
 
           <input
             type="email"
-            name="email"
             value={profile.email}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
+            disabled
+            className="w-full border rounded-lg p-3 bg-gray-100"
           />
-        </div>
-
-        <div>
-          <label className="font-medium">Phone</label>
 
           <input
             type="text"
             name="phone"
             value={profile.phone}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
+            className="w-full border rounded-lg p-3"
           />
-        </div>
 
-        <div>
-          <label className="font-medium">Blood Group</label>
+          <input
+            type="text"
+            name="city"
+            value={profile.city}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-3"
+          />
 
           <select
             name="bloodGroup"
             value={profile.bloodGroup}
             onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
+            className="w-full border rounded-lg p-3"
           >
             <option>A+</option>
             <option>A-</option>
@@ -92,75 +134,29 @@ function Profile() {
             <option>O+</option>
             <option>O-</option>
           </select>
-        </div>
-
-        <div>
-          <label className="font-medium">Age</label>
-
-          <input
-            type="number"
-            name="age"
-            value={profile.age}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
-          />
-        </div>
-
-        <div>
-          <label className="font-medium">Gender</label>
-
-          <select
-            name="gender"
-            value={profile.gender}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
-          >
-            <option>Female</option>
-            <option>Male</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="font-medium">City</label>
 
           <input
             type="text"
-            name="city"
-            value={profile.city}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 mt-2"
+            value={profile.role}
+            disabled
+            className="w-full border rounded-lg p-3 bg-gray-100"
           />
-        </div>
-
-        <div className="flex items-center gap-3 mt-8">
-          <input
-            type="checkbox"
-            name="available"
-            checked={profile.available}
-            onChange={handleChange}
-          />
-
-          <label className="font-medium">
-            Available to Donate
-          </label>
-        </div>
-
-        <div className="md:col-span-2">
 
           <button
             type="submit"
-            className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition"
+            className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700"
           >
             Save Changes
           </button>
 
-        </div>
+        </form>
 
-      </form>
+      </div>
 
     </div>
+
   );
+
 }
 
 export default Profile;

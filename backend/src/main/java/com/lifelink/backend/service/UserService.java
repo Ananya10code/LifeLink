@@ -10,6 +10,7 @@ import com.lifelink.backend.response.ApiResponse;
 import com.lifelink.backend.security.JwtService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.lifelink.backend.dto.UpdateProfileRequest;
 
 @Service
 public class UserService {
@@ -75,5 +76,24 @@ public class UserService {
                 user.getCity(),
                 user.getBloodGroup(),
                 user.getRole());
+    }
+
+    public ApiResponse updateProfile(
+            String email,
+            UpdateProfileRequest request) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setFullName(request.getFullName());
+        user.setPhone(request.getPhone());
+        user.setCity(request.getCity());
+        user.setBloodGroup(request.getBloodGroup());
+
+        userRepository.save(user);
+
+        return new ApiResponse(
+                true,
+                "Profile updated successfully");
     }
 }

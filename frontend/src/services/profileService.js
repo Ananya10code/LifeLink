@@ -2,22 +2,24 @@ import axios from "axios";
 
 const API = "http://localhost:8080/api/profile";
 
-const getHeaders = () => ({
-    Authorization: `Bearer ${localStorage.getItem("token")}`
-});
+export const getProfile = () => {
 
-export const getProfile = async () => {
-    const response = await axios.get(API, {
-        headers: getHeaders()
+    const token = localStorage.getItem("token");
+
+    return axios.get(API, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     });
-
-    return response.data;
 };
 
-export const updateProfile = async (profile) => {
-    const response = await axios.put(API, profile, {
-        headers: getHeaders()
-    });
+export const updateProfile = (profile) => {
 
-    return response.data;
+    const token = localStorage.getItem("token");
+
+    return axios.put(API, profile, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
 };
