@@ -1,6 +1,5 @@
 com\lifelink\backend\BackendApplication.class
 com\lifelink\backend\dto\RegisterRequest.class
-com\lifelink\backend\service\UserService.class
 com\lifelink\backend\dto\DashboardResponse.class
 com\lifelink\backend\service\BloodRequestService.class
 com\lifelink\backend\controller\UserController.class

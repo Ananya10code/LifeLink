@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 
 // Main Pages
+import Donors from "./pages/Donors";
 import Dashboard from "./pages/Dashboard";
 import BloodRequest from "./pages/BloodRequest";
 import BloodRequests from "./pages/BloodRequests";
@@ -100,6 +101,15 @@ function App() {
           element={
             <ProtectedRoute>
               <BloodRequests />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/donors"
+          element={
+            <ProtectedRoute>
+              <Donors />
             </ProtectedRoute>
           }
         />

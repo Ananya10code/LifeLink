@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -135,7 +136,7 @@ function Dashboard() {
                         Quick Actions
                     </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                         <button
                             onClick={() => navigate("/blood-request")}
@@ -190,6 +191,22 @@ function Dashboard() {
                             </p>
 
                         </button>
+                        <Link
+                            to="/donors"
+                            className="bg-purple-600 text-white p-6 rounded-xl shadow-lg hover:bg-purple-700 transition"
+                        >
+                            <div className="text-3xl mb-2">
+                                ❤️
+                            </div>
+
+                            <h3 className="text-xl font-bold">
+                                Donor Directory
+                            </h3>
+
+                            <p className="mt-2 text-purple-100">
+                                Search donors by city and blood group.
+                            </p>
+                        </Link>
 
                     </div>
 

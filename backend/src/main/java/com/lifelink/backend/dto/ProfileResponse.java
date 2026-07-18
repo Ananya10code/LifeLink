@@ -5,17 +5,27 @@ public class ProfileResponse {
     private Long id;
     private String fullName;
     private String email;
+    private String phone;
+    private String city;
     private String bloodGroup;
     private String role;
 
     public ProfileResponse() {
     }
 
-    public ProfileResponse(Long id, String fullName, String email,
-            String bloodGroup, String role) {
+    public ProfileResponse(Long id,
+            String fullName,
+            String email,
+            String phone,
+            String city,
+            String bloodGroup,
+            String role) {
+
         this.id = id;
         this.fullName = fullName;
         this.email = email;
+        this.phone = phone;
+        this.city = city;
         this.bloodGroup = bloodGroup;
         this.role = role;
     }
@@ -42,6 +52,22 @@ public class ProfileResponse {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getBloodGroup() {

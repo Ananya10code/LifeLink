@@ -38,6 +38,8 @@ public class UserService {
         user.setFullName(request.getFullName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setPhone(request.getPhone());
+        user.setCity(request.getCity());
         user.setBloodGroup(request.getBloodGroup());
         user.setRole(request.getRole());
 
@@ -69,6 +71,8 @@ public class UserService {
                 user.getId(),
                 user.getFullName(),
                 user.getEmail(),
+                user.getPhone(),
+                user.getCity(),
                 user.getBloodGroup(),
                 user.getRole());
     }
