@@ -13,28 +13,31 @@ public class Volunteer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "blood_request_id")
     private BloodRequest bloodRequest;
+
+    @ManyToOne
+    @JoinColumn(name = "donor_id")
+    private User donor;
 
     private LocalDateTime volunteeredAt;
 
     public Volunteer() {
     }
 
+    public Volunteer(Long id,
+            BloodRequest bloodRequest,
+            User donor,
+            LocalDateTime volunteeredAt) {
+
+        this.id = id;
+        this.bloodRequest = bloodRequest;
+        this.donor = donor;
+        this.volunteeredAt = volunteeredAt;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public BloodRequest getBloodRequest() {
@@ -45,11 +48,23 @@ public class Volunteer {
         this.bloodRequest = bloodRequest;
     }
 
+    public User getDonor() {
+        return donor;
+    }
+
+    public void setDonor(User donor) {
+        this.donor = donor;
+    }
+
     public LocalDateTime getVolunteeredAt() {
         return volunteeredAt;
     }
 
     public void setVolunteeredAt(LocalDateTime volunteeredAt) {
         this.volunteeredAt = volunteeredAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

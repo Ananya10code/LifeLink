@@ -6,6 +6,7 @@ import com.lifelink.backend.response.ApiResponse;
 import com.lifelink.backend.service.BloodRequestService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -21,12 +22,26 @@ public class BloodRequestController {
     }
 
     @PostMapping
-    public ApiResponse createRequest(@Valid @RequestBody BloodRequestDto dto) {
-        return service.createRequest(dto);
+    public ApiResponse createRequest(
+            @RequestBody BloodRequestDto dto,
+            Authentication authentication) {
+
+        return service.createRequest(
+                dto,
+                authentication.getName());
     }
 
     @GetMapping
     public List<BloodRequest> getAllRequests() {
         return service.getAllRequests();
+    }
+
+    @GetMapping("/my")
+    public List<BloodRequest> getMyRequests(
+            Authentication authentication) {
+
+        return service.getMyRequests(
+                authentication.getName());
+
     }
 }

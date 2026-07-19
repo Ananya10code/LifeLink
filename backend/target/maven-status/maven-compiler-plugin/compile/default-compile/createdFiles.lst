@@ -29,6 +29,7 @@ com\lifelink\backend\controller\ProfileController.class
 com\lifelink\backend\service\DashboardService.class
 com\lifelink\backend\entity\Volunteer.class
 com\lifelink\backend\repository\UserRepository.class
+com\lifelink\backend\dto\VolunteerResponse.class
 com\lifelink\backend\security\JwtService.class
 com\lifelink\backend\config\SecurityConfig.class
 com\lifelink\backend\entity\User.class

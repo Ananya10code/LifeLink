@@ -84,6 +84,27 @@ function BloodRequests() {
 
             default:
                 return "bg-gray-500";
+
+        }
+
+    };
+
+    const statusColor = (status) => {
+
+        switch (status) {
+
+            case "OPEN":
+                return "bg-green-500";
+
+            case "ACCEPTED":
+                return "bg-blue-500";
+
+            case "COMPLETED":
+                return "bg-gray-600";
+
+            default:
+                return "bg-gray-500";
+
         }
 
     };
@@ -95,6 +116,8 @@ function BloodRequests() {
             const response = await volunteer(requestId);
 
             alert(response.data.message);
+
+            fetchRequests();
 
         } catch (error) {
 
@@ -192,6 +215,7 @@ function BloodRequests() {
                             <th className="p-4">City</th>
                             <th className="p-4">Units</th>
                             <th className="p-4">Urgency</th>
+                            <th className="p-4">Status</th>
                             <th className="p-4">Contact</th>
                             <th className="p-4">Volunteer</th>
                             <th className="p-4">Matching Donors</th>
@@ -207,7 +231,7 @@ function BloodRequests() {
                             <tr>
 
                                 <td
-                                    colSpan="9"
+                                    colSpan="10"
                                     className="text-center p-8 text-gray-500"
                                 >
                                     No blood requests found.
@@ -259,17 +283,37 @@ function BloodRequests() {
                                     </td>
 
                                     <td className="p-4">
+
+                                        <span
+                                            className={`text-white px-3 py-1 rounded-full ${statusColor(request.status)}`}
+                                        >
+                                            {request.status}
+                                        </span>
+
+                                    </td>
+
+                                    <td className="p-4">
                                         {request.contact}
                                     </td>
 
                                     <td className="p-4">
 
-                                        <button
-                                            onClick={() => handleVolunteer(request.id)}
-                                            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
-                                        >
-                                            Volunteer
-                                        </button>
+                                        {request.status === "OPEN" ? (
+
+                                            <button
+                                                onClick={() => handleVolunteer(request.id)}
+                                                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
+                                            >
+                                                Volunteer
+                                            </button>
+
+                                        ) : (
+
+                                            <span className="text-blue-600 font-semibold">
+                                                Accepted
+                                            </span>
+
+                                        )}
 
                                     </td>
 

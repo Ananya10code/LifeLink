@@ -5,9 +5,16 @@ import com.lifelink.backend.entity.User;
 import com.lifelink.backend.entity.Volunteer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
 
-    boolean existsByUserAndBloodRequest(User user, BloodRequest bloodRequest);
+    Optional<Volunteer> findByBloodRequestAndDonor(
+            BloodRequest bloodRequest,
+            User donor);
 
-    long countByBloodRequest(BloodRequest bloodRequest);
+    List<Volunteer> findByBloodRequest(BloodRequest bloodRequest);
+
+    List<Volunteer> findByDonor(User donor);
 }

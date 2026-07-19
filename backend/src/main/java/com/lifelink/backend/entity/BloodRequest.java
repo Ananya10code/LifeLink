@@ -1,6 +1,8 @@
 package com.lifelink.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "blood_requests")
@@ -23,6 +25,13 @@ public class BloodRequest {
     private String urgency;
 
     private String contact;
+
+    @Column(nullable = false)
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     public BloodRequest() {
     }
@@ -85,5 +94,21 @@ public class BloodRequest {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 }

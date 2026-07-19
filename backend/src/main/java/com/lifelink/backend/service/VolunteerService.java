@@ -30,32 +30,48 @@ public class VolunteerService {
 
     public ApiResponse volunteer(Long requestId, String email) {
 
-        User user = userRepository.findByEmail(email)
+        // Get logged-in donor
+        User donor = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Get blood request
         BloodRequest request = bloodRequestRepository.findById(requestId)
                 .orElseThrow(() -> new RuntimeException("Blood request not found"));
 
-        if (volunteerRepository.existsByUserAndBloodRequest(user, request)) {
-            return new ApiResponse(false, "You have already volunteered for this request.");
+        // Don't allow volunteering if already accepted
+        if ("ACCEPTED".equals(request.getStatus())) {
+
+            return new ApiResponse(
+                    false,
+                    "This blood request has already been accepted.");
         }
 
+        // Prevent duplicate volunteering
+        if (volunteerRepository
+                .findByBloodRequestAndDonor(request, donor)
+                .isPresent()) {
+
+            return new ApiResponse(
+                    false,
+                    "You have already volunteered for this request.");
+        }
+
+        // Create volunteer record
         Volunteer volunteer = new Volunteer();
 
-        volunteer.setUser(user);
         volunteer.setBloodRequest(request);
+        volunteer.setDonor(donor);
         volunteer.setVolunteeredAt(LocalDateTime.now());
 
         volunteerRepository.save(volunteer);
 
-        return new ApiResponse(true, "Thank you for volunteering!");
-    }
+        // Update request status
+        request.setStatus("ACCEPTED");
 
-    public long getVolunteerCount(Long requestId) {
+        bloodRequestRepository.save(request);
 
-        BloodRequest request = bloodRequestRepository.findById(requestId)
-                .orElseThrow(() -> new RuntimeException("Blood request not found"));
-
-        return volunteerRepository.countByBloodRequest(request);
+        return new ApiResponse(
+                true,
+                "Volunteer registered successfully.");
     }
 }

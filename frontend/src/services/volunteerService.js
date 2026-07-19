@@ -1,12 +1,13 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/volunteer";
+const API = "http://localhost:8080/api/volunteers";
 
 export const volunteer = (requestId) => {
+
     const token = localStorage.getItem("token");
 
     return axios.post(
-        `${API_URL}/${requestId}`,
+        `${API}/${requestId}`,
         {},
         {
             headers: {
@@ -14,17 +15,5 @@ export const volunteer = (requestId) => {
             }
         }
     );
-};
 
-export const getVolunteerCount = (requestId) => {
-    const token = localStorage.getItem("token");
-
-    return axios.get(
-        `${API_URL}/count/${requestId}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-    );
 };
