@@ -191,6 +191,23 @@ function Dashboard() {
                             </p>
 
                         </button>
+
+                        <button
+                            onClick={() => navigate("/my-requests")}
+                            className="bg-purple-600 text-white p-6 rounded-xl shadow-lg hover:bg-purple-700 transition"
+                        >
+                            <div className="text-3xl mb-2">
+                                📄
+                            </div>
+
+                            <h3 className="text-xl font-bold">
+                                My Requests
+                            </h3>
+
+                            <p className="mt-2 text-purple-100">
+                                View all blood requests created by you.
+                            </p>
+                        </button>
                         <Link
                             to="/donors"
                             className="bg-purple-600 text-white p-6 rounded-xl shadow-lg hover:bg-purple-700 transition"

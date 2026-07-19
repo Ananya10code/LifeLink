@@ -17,4 +17,10 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
     List<Volunteer> findByBloodRequest(BloodRequest bloodRequest);
 
     List<Volunteer> findByDonor(User donor);
+
+    Optional<Volunteer> findByBloodRequestAndDonor(
+            BloodRequest bloodRequest,
+            User donor);
+
+    List<Volunteer> findByBloodRequest(BloodRequest bloodRequest);
 }

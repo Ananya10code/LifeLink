@@ -44,4 +44,14 @@ public class BloodRequestController {
                 authentication.getName());
 
     }
+
+    @PutMapping("/{id}/complete")
+    public ApiResponse completeRequest(
+            @PathVariable Long id,
+            Authentication authentication) {
+
+        return service.completeRequest(
+                id,
+                authentication.getName());
+    }
 }

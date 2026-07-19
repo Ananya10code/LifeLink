@@ -58,4 +58,22 @@ public class BloodRequestService {
         return repository.findByCreatedBy(user);
 
     }
+
+    public ApiResponse completeRequest(Long id, String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        BloodRequest request = repository
+                .findByIdAndCreatedBy(id, user)
+                .orElseThrow(() -> new RuntimeException("Blood request not found"));
+
+        request.setStatus("COMPLETED");
+
+        repository.save(request);
+
+        return new ApiResponse(
+                true,
+                "Blood request marked as completed.");
+    }
 }

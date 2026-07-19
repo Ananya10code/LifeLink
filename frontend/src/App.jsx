@@ -19,6 +19,7 @@ import MatchingDonors from "./pages/MatchingDonors";
 import Dashboard from "./pages/Dashboard";
 import BloodRequest from "./pages/BloodRequest";
 import BloodRequests from "./pages/BloodRequests";
+import MyRequests from "./pages/MyRequests";
 
 function App() {
   return (
@@ -141,6 +142,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-requests"
+          element={
+            <ProtectedRoute>
+              <MyRequests />
             </ProtectedRoute>
           }
         />

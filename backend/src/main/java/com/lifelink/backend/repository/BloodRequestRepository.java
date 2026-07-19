@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.lifelink.backend.entity.User;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BloodRequestRepository extends JpaRepository<BloodRequest, Long> {
@@ -17,4 +18,6 @@ public interface BloodRequestRepository extends JpaRepository<BloodRequest, Long
     long countCities();
 
     List<BloodRequest> findByCreatedBy(User user);
+
+    Optional<BloodRequest> findByIdAndCreatedBy(Long id, User user);
 }
