@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     getMyRequests,
     completeRequest
@@ -7,6 +8,7 @@ import {
 function MyRequests() {
 
     const [requests, setRequests] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchMyRequests();
@@ -183,22 +185,27 @@ function MyRequests() {
 
                                     <td className="p-4">
 
-                                        {request.status === "OPEN" ? (
+                                        <div className="flex justify-center gap-2">
+
+                                            {request.status === "OPEN" && (
+
+                                                <button
+                                                    onClick={() => handleComplete(request.id)}
+                                                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                                                >
+                                                    Complete
+                                                </button>
+
+                                            )}
 
                                             <button
-                                                onClick={() => handleComplete(request.id)}
-                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition"
+                                                onClick={() => navigate(`/volunteers/${request.id}`)}
+                                                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
                                             >
-                                                Complete
+                                                View Volunteers
                                             </button>
 
-                                        ) : (
-
-                                            <span className="text-gray-500 font-medium">
-                                                —
-                                            </span>
-
-                                        )}
+                                        </div>
 
                                     </td>
 

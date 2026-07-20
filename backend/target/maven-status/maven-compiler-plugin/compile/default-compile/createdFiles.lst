@@ -33,6 +33,7 @@ com\lifelink\backend\dto\VolunteerResponse.class
 com\lifelink\backend\security\JwtService.class
 com\lifelink\backend\config\SecurityConfig.class
 com\lifelink\backend\entity\User.class
+com\lifelink\backend\dto\AdminDashboardResponse.class
 com\lifelink\backend\exception\GlobalExceptionHandler.class
 com\lifelink\backend\service\AuthenticationService.class
 com\lifelink\backend\dto\AuthResponse.class

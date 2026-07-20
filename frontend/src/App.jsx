@@ -20,6 +20,7 @@ import Dashboard from "./pages/Dashboard";
 import BloodRequest from "./pages/BloodRequest";
 import BloodRequests from "./pages/BloodRequests";
 import MyRequests from "./pages/MyRequests";
+import VolunteerHistory from "./pages/VolunteerHistory";
 
 function App() {
   return (
@@ -151,6 +152,15 @@ function App() {
           element={
             <ProtectedRoute>
               <MyRequests />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/volunteers/:id"
+          element={
+            <ProtectedRoute>
+              <VolunteerHistory />
             </ProtectedRoute>
           }
         />

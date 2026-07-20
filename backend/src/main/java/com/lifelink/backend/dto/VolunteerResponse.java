@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 public class VolunteerResponse {
 
     private Long id;
-    private Long requestId;
-    private String donorName;
-    private String donorEmail;
-    private String donorPhone;
+    private String fullName;
+    private String bloodGroup;
+    private String phone;
+    private String city;
     private LocalDateTime volunteeredAt;
 
     public VolunteerResponse() {
@@ -16,17 +16,17 @@ public class VolunteerResponse {
 
     public VolunteerResponse(
             Long id,
-            Long requestId,
-            String donorName,
-            String donorEmail,
-            String donorPhone,
+            String fullName,
+            String bloodGroup,
+            String phone,
+            String city,
             LocalDateTime volunteeredAt) {
 
         this.id = id;
-        this.requestId = requestId;
-        this.donorName = donorName;
-        this.donorEmail = donorEmail;
-        this.donorPhone = donorPhone;
+        this.fullName = fullName;
+        this.bloodGroup = bloodGroup;
+        this.phone = phone;
+        this.city = city;
         this.volunteeredAt = volunteeredAt;
     }
 
@@ -34,20 +34,20 @@ public class VolunteerResponse {
         return id;
     }
 
-    public Long getRequestId() {
-        return requestId;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getDonorName() {
-        return donorName;
+    public String getBloodGroup() {
+        return bloodGroup;
     }
 
-    public String getDonorEmail() {
-        return donorEmail;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getDonorPhone() {
-        return donorPhone;
+    public String getCity() {
+        return city;
     }
 
     public LocalDateTime getVolunteeredAt() {
@@ -58,20 +58,20 @@ public class VolunteerResponse {
         this.id = id;
     }
 
-    public void setRequestId(Long requestId) {
-        this.requestId = requestId;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public void setDonorName(String donorName) {
-        this.donorName = donorName;
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 
-    public void setDonorEmail(String donorEmail) {
-        this.donorEmail = donorEmail;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setDonorPhone(String donorPhone) {
-        this.donorPhone = donorPhone;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setVolunteeredAt(LocalDateTime volunteeredAt) {
