@@ -22,6 +22,7 @@ import BloodRequests from "./pages/BloodRequests";
 import MyRequests from "./pages/MyRequests";
 import VolunteerHistory from "./pages/VolunteerHistory";
 import AdminDashboard from "./pages/AdminDashboard";
+import Notifications from "./pages/Notifications";
 
 function App() {
   return (
@@ -171,6 +172,15 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
             </ProtectedRoute>
           }
         />
