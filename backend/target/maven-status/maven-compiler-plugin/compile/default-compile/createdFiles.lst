@@ -8,6 +8,7 @@ com\lifelink\backend\controller\DonorController.class
 com\lifelink\backend\dto\DonorResponse.class
 com\lifelink\backend\dto\DashboardResponse.class
 com\lifelink\backend\service\DonorService.class
+com\lifelink\backend\controller\AdminController.class
 com\lifelink\backend\dto\UpdateProfileRequest.class
 com\lifelink\backend\dto\PasswordUpdateRequest.class
 com\lifelink\backend\service\BloodRequestService.class
@@ -26,6 +27,7 @@ com\lifelink\backend\entity\BloodRequest.class
 com\lifelink\backend\response\ApiResponse.class
 com\lifelink\backend\controller\BloodRequestController.class
 com\lifelink\backend\controller\ProfileController.class
+com\lifelink\backend\service\AdminService.class
 com\lifelink\backend\service\DashboardService.class
 com\lifelink\backend\entity\Volunteer.class
 com\lifelink\backend\repository\UserRepository.class

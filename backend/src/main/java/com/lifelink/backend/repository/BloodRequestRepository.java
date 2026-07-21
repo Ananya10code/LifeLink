@@ -20,4 +20,6 @@ public interface BloodRequestRepository extends JpaRepository<BloodRequest, Long
     List<BloodRequest> findByCreatedBy(User user);
 
     Optional<BloodRequest> findByIdAndCreatedBy(Long id, User user);
+
+    List<BloodRequest> findByStatus(String status);
 }

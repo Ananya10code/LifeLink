@@ -11,9 +11,11 @@ import java.util.Optional;
 public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
 
     Optional<Volunteer> findByBloodRequestAndDonor(
-            BloodRequest request,
+            BloodRequest bloodRequest,
             User donor);
 
-    List<Volunteer> findByBloodRequest(
-            BloodRequest request);
+    List<Volunteer> findByBloodRequest(BloodRequest bloodRequest);
+
+    List<Volunteer> findByDonor(User donor);
+
 }
