@@ -3,6 +3,7 @@ import {
     getNotifications,
     markAsRead
 } from "../services/notificationService";
+import Navbar from "../components/Navbar";
 
 function Notifications() {
 

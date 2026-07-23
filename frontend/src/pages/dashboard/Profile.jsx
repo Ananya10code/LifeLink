@@ -3,6 +3,7 @@ import {
   getProfile,
   updateProfile
 } from "../../services/profileService";
+import Navbar from "../../components/Navbar";
 
 function Profile() {
 

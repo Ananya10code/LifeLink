@@ -1,12 +1,12 @@
 package com.lifelink.backend.controller;
 
-import com.lifelink.backend.dto.AdminDashboardResponse;
 import com.lifelink.backend.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://localhost:5173")
 public class AdminController {
 
     private final AdminService adminService;
@@ -16,7 +16,7 @@ public class AdminController {
     }
 
     @GetMapping("/dashboard")
-    public AdminDashboardResponse getDashboard() {
-        return adminService.getDashboard();
+    public Map<String, Long> dashboard() {
+        return adminService.getDashboardStats();
     }
 }

@@ -11,7 +11,8 @@ api.interceptors.request.use((config) => {
 
     const token = localStorage.getItem("token");
 
-    // Don't attach token to login/register requests
+    console.log("TOKEN =", token);
+
     if (
         token &&
         !config.url.includes("/auth/login") &&
@@ -19,6 +20,8 @@ api.interceptors.request.use((config) => {
     ) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+
+    console.log(config.headers);
 
     return config;
 });

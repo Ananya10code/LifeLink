@@ -21,6 +21,7 @@ C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\PasswordU
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\ProfileResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\RegisterRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\UpdateProfileRequest.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\UserResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\dto\VolunteerResponse.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\entity\BloodRequest.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\entity\Notification.java
@@ -40,6 +41,7 @@ C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\Blood
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\CustomUserDetailsService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\DashboardService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\DonorService.java
+C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\EmailService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\NotificationService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\ProfileService.java
 C:\Users\anany\LifeLink\backend\src\main\java\com\lifelink\backend\service\UserService.java

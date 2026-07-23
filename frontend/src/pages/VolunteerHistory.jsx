@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getVolunteers } from "../services/volunteerHistoryService";
+import Navbar from "../components/Navbar";
 
 function VolunteerHistory() {
 

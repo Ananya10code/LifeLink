@@ -1,90 +1,91 @@
 import { useEffect, useState } from "react";
-import { getDashboard } from "../services/adminService";
+import { getDashboardStats } from "../services/adminService";
 
 function AdminDashboard() {
 
     const [stats, setStats] = useState({
-        totalUsers: 0,
-        totalDonors: 0,
-        totalRequests: 0,
-        openRequests: 0,
-        completedRequests: 0,
-        totalVolunteers: 0
+        users: 0,
+        donors: 0,
+        requests: 0,
+        volunteers: 0
     });
 
     useEffect(() => {
-        fetchDashboard();
+        fetchStats();
     }, []);
 
-    const fetchDashboard = async () => {
+    const fetchStats = async () => {
 
         try {
 
-            const response = await getDashboard();
+            const response = await getDashboardStats();
+
+            console.log(response);
+            console.log(response.data);
 
             setStats(response.data);
 
         } catch (error) {
-
             console.log(error);
+            console.log(error.response);
 
-            alert("Unable to load dashboard");
-
+            alert(
+                error.response?.status +
+                " " +
+                JSON.stringify(error.response?.data)
+            );
         }
 
     };
 
     const Card = ({ title, value, color }) => (
-        <div className={`rounded-xl shadow-lg p-6 text-white ${color}`}>
-            <h2 className="text-lg font-semibold">{title}</h2>
-            <p className="text-4xl font-bold mt-3">{value}</p>
+
+        <div className={`${color} text-white rounded-xl shadow-lg p-6`}>
+
+            <h2 className="text-xl font-semibold">
+                {title}
+            </h2>
+
+            <p className="text-4xl font-bold mt-4">
+                {value}
+            </p>
+
         </div>
+
     );
 
     return (
 
-        <div className="min-h-screen bg-gray-100 p-8">
+        <div className="min-h-screen bg-red-50 p-8">
 
             <h1 className="text-4xl font-bold text-red-600 mb-8">
                 Admin Dashboard
             </h1>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <Card
-                    title="Total Users"
-                    value={stats.totalUsers}
+                    title="Users"
+                    value={stats.users}
                     color="bg-blue-600"
                 />
 
                 <Card
-                    title="Total Donors"
-                    value={stats.totalDonors}
+                    title="Donors"
+                    value={stats.donors}
                     color="bg-green-600"
                 />
 
                 <Card
                     title="Blood Requests"
-                    value={stats.totalRequests}
+                    value={stats.requests}
                     color="bg-red-600"
                 />
 
                 <Card
-                    title="Open Requests"
-                    value={stats.openRequests}
-                    color="bg-yellow-500"
-                />
-
-                <Card
-                    title="Completed Requests"
-                    value={stats.completedRequests}
-                    color="bg-purple-600"
-                />
-
-                <Card
                     title="Volunteers"
-                    value={stats.totalVolunteers}
-                    color="bg-pink-600"
+                    value={stats.volunteers}
+                    color="bg-purple-600"
                 />
 
             </div>

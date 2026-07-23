@@ -13,93 +13,96 @@ import java.util.List;
 @Service
 public class BloodRequestService {
 
-    private final BloodRequestRepository repository;
-    private final UserRepository userRepository;
-    private final NotificationService notificationService;
+        private final BloodRequestRepository repository;
+        private final UserRepository userRepository;
+        private final NotificationService notificationService;
+        private final EmailService emailService;
 
-    public BloodRequestService(
-            BloodRequestRepository repository,
-            UserRepository userRepository,
-            NotificationService notificationService) {
+        public BloodRequestService(
+                        BloodRequestRepository repository,
+                        UserRepository userRepository,
+                        NotificationService notificationService,
+                        EmailService emailService) {
 
-        this.repository = repository;
-        this.userRepository = userRepository;
-        this.notificationService = notificationService;
-    }
-
-    public ApiResponse createRequest(BloodRequestDto dto, String email) {
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        BloodRequest request = new BloodRequest();
-
-        request.setPatientName(dto.getPatientName());
-        request.setHospital(dto.getHospital());
-        request.setBloodGroup(dto.getBloodGroup());
-        request.setUnits(dto.getUnits());
-        request.setCity(dto.getCity());
-        request.setUrgency(dto.getUrgency());
-        request.setContact(dto.getContact());
-        request.setStatus("OPEN");
-        request.setCreatedBy(user);
-
-        repository.save(request);
-        List<User> donors = userRepository.findByRoleAndBloodGroupAndCity(
-                "DONOR",
-                request.getBloodGroup(),
-                request.getCity());
-
-        System.out.println("===== Notification Debug =====");
-        System.out.println("Blood Group: " + request.getBloodGroup());
-        System.out.println("City: " + request.getCity());
-        System.out.println("Matching donors found: " + donors.size());
-
-        for (User donor : donors) {
-
-            System.out.println("Creating notification for: " + donor.getEmail());
-
-            notificationService.createNotification(
-                    donor,
-                    "New " + request.getBloodGroup()
-                            + " blood request at "
-                            + request.getHospital()
-                            + " (" + request.getCity() + ")");
+                this.repository = repository;
+                this.userRepository = userRepository;
+                this.notificationService = notificationService;
+                this.emailService = emailService;
         }
 
-        System.out.println("===== End Debug =====");
+        public ApiResponse createRequest(BloodRequestDto dto, String email) {
 
-        return new ApiResponse(true, "Blood request created successfully.");
-    }
+                User user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    public List<BloodRequest> getAllRequests() {
-        return repository.findAll();
-    }
+                BloodRequest request = new BloodRequest();
 
-    public List<BloodRequest> getMyRequests(String email) {
+                request.setPatientName(dto.getPatientName());
+                request.setHospital(dto.getHospital());
+                request.setBloodGroup(dto.getBloodGroup());
+                request.setUnits(dto.getUnits());
+                request.setCity(dto.getCity());
+                request.setUrgency(dto.getUrgency());
+                request.setContact(dto.getContact());
+                request.setStatus("OPEN");
+                request.setCreatedBy(user);
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                repository.save(request);
+                List<User> donors = userRepository.findByRoleAndBloodGroupAndCity(
+                                "DONOR",
+                                request.getBloodGroup(),
+                                request.getCity());
 
-        return repository.findByCreatedBy(user);
+                System.out.println("===== Notification Debug =====");
+                System.out.println("Blood Group: " + request.getBloodGroup());
+                System.out.println("City: " + request.getCity());
+                System.out.println("Matching donors found: " + donors.size());
 
-    }
+                for (User donor : donors) {
 
-    public ApiResponse completeRequest(Long id, String email) {
+                        notificationService.createNotification(
+                                        donor,
+                                        "New " + request.getBloodGroup()
+                                                        + " blood request at "
+                                                        + request.getHospital()
+                                                        + " (" + request.getCity() + ")");
 
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                        emailService.sendBloodRequestEmail(donor, request);
+                }
 
-        BloodRequest request = repository
-                .findByIdAndCreatedBy(id, user)
-                .orElseThrow(() -> new RuntimeException("Blood request not found"));
+                System.out.println("===== End Debug =====");
 
-        request.setStatus("COMPLETED");
+                return new ApiResponse(true, "Blood request created successfully.");
+        }
 
-        repository.save(request);
+        public List<BloodRequest> getAllRequests() {
+                return repository.findAll();
+        }
 
-        return new ApiResponse(
-                true,
-                "Blood request marked as completed.");
-    }
+        public List<BloodRequest> getMyRequests(String email) {
+
+                User user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new RuntimeException("User not found"));
+
+                return repository.findByCreatedBy(user);
+
+        }
+
+        public ApiResponse completeRequest(Long id, String email) {
+
+                User user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new RuntimeException("User not found"));
+
+                BloodRequest request = repository
+                                .findByIdAndCreatedBy(id, user)
+                                .orElseThrow(() -> new RuntimeException("Blood request not found"));
+
+                request.setStatus("COMPLETED");
+
+                repository.save(request);
+
+                return new ApiResponse(
+                                true,
+                                "Blood request marked as completed.");
+        }
 }

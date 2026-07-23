@@ -1,72 +1,151 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUnreadCount } from "../services/notificationService";
 
 function Navbar() {
+
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+
+    if (token) {
+      loadUnreadCount();
+    }
+
+  }, []);
+
+  const loadUnreadCount = async () => {
+
+    try {
+
+      const response = await getUnreadCount();
+
+      setUnreadCount(response.data);
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
+
+  const logout = () => {
+
+    localStorage.removeItem("token");
+
+    navigate("/login");
+
+  };
+
   return (
+
     <nav className="bg-white shadow-md sticky top-0 z-50">
+
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-        {/* Logo */}
         <Link
           to="/"
-          className="text-3xl font-bold text-red-600 hover:text-red-700 transition"
+          className="text-3xl font-bold text-red-600"
         >
           ❤️ LifeLink
         </Link>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-8 text-lg font-medium">
+        {!token ? (
 
-          <li>
+          <>
+            <ul className="flex items-center gap-8 text-lg font-medium">
+
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+
+            </ul>
+
+            <div className="flex gap-4">
+
+              <Link
+                to="/login"
+                className="px-5 py-2 border border-red-600 rounded-lg text-red-600"
+              >
+                Login
+              </Link>
+
+              <Link
+                to="/register"
+                className="px-5 py-2 bg-red-600 text-white rounded-lg"
+              >
+                Register
+              </Link>
+
+            </div>
+          </>
+
+        ) : (
+
+          <div className="flex items-center gap-6">
+
             <Link
-              to="/"
-              className="hover:text-red-600 transition"
+              to="/dashboard"
+              className="hover:text-red-600"
             >
-              Home
+              Dashboard
             </Link>
-          </li>
 
-          <li>
             <Link
-              to="/about"
-              className="hover:text-red-600 transition"
+              to="/notifications"
+              className="relative text-2xl"
             >
-              About
-            </Link>
-          </li>
+              🔔
 
-          <li>
+              {unreadCount > 0 && (
+
+                <span
+                  className="absolute -top-2 -right-3 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
+                >
+                  {unreadCount}
+                </span>
+
+              )}
+
+            </Link>
+
             <Link
-              to="/contact"
-              className="hover:text-red-600 transition"
+              to="/profile"
+              className="hover:text-red-600"
             >
-              Contact
+              Profile
             </Link>
-          </li>
 
-        </ul>
+            <button
+              onClick={logout}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg"
+            >
+              Logout
+            </button>
 
-        {/* Buttons */}
-        <div className="flex items-center gap-4">
+          </div>
 
-          <Link
-            to="/login"
-            className="px-5 py-2 rounded-lg border border-red-600 text-red-600 hover:bg-red-50 transition"
-          >
-            Login
-          </Link>
-
-          <Link
-            to="/register"
-            className="px-5 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition"
-          >
-            Register
-          </Link>
-
-        </div>
+        )}
 
       </div>
+
     </nav>
+
   );
+
 }
 
 export default Navbar;
