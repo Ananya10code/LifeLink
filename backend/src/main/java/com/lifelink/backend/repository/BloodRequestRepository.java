@@ -22,4 +22,6 @@ public interface BloodRequestRepository extends JpaRepository<BloodRequest, Long
     Optional<BloodRequest> findByIdAndCreatedBy(Long id, User user);
 
     List<BloodRequest> findByStatus(String status);
+
+    void deleteByCreatedBy(User user);
 }

@@ -25,20 +25,28 @@ public class EmailService {
 
         message.setText(
                 "Hello " + donor.getFullName() + ",\n\n" +
-
                         "A new blood request matches your blood group.\n\n" +
-
                         "Patient Name : " + request.getPatientName() + "\n" +
                         "Blood Group : " + request.getBloodGroup() + "\n" +
                         "Hospital : " + request.getHospital() + "\n" +
                         "City : " + request.getCity() + "\n" +
                         "Units Required : " + request.getUnits() + "\n" +
                         "Contact : " + request.getContact() + "\n\n" +
-
                         "Please login to LifeLink and volunteer.\n\n" +
-
                         "Thank you,\n" +
                         "LifeLink Team ❤️");
+
+        mailSender.send(message);
+    }
+
+    // Generic email sender
+    public void sendEmail(String to, String subject, String body) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
 
         mailSender.send(message);
     }

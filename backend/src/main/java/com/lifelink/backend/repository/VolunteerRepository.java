@@ -18,4 +18,8 @@ public interface VolunteerRepository extends JpaRepository<Volunteer, Long> {
 
     List<Volunteer> findByDonor(User donor);
 
+    void deleteByDonor(User donor);
+
+    void deleteByBloodRequest(BloodRequest bloodRequest);
+
 }

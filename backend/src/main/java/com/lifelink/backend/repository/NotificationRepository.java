@@ -12,4 +12,6 @@ public interface NotificationRepository
     List<Notification> findByUserOrderByCreatedAtDesc(User user);
 
     long countByUserAndReadStatusFalse(User user);
+
+    void deleteByUser(User user);
 }
